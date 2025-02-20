@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{common/layouts/main_layout}"
+	  layout:fragment="content">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div class="container text-center">
+		<h3>게시글 상세</h3>
+		<table class="table table-bordered">
+			<tr>
+				<th>번호</th>
+				<td>[[ ${brd.bno} ]]</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>[[ ${brd.title} ]]</td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td>[[ ${brd.writer} ]]</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>[[ ${brd.contents} ]]</td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+			<!-- <td>[[ ${brd.image} ]]</td>  -->	
+			<!-- /images/cat.jpg -->
+			<td><img style="width:20%;" th:src='@{/images/{file}(file=${brd.image})}'></td>
+			</tr>
+			<tr>
+				<th>작성일자</th>
+				<td>[[ ${#dates.format(brd.regdate, "yyyy/MM/dd")} ]]</td>
+			</tr>
+		</table>
+		<button type="button" class="btn btn-dark">수정</button>
+		<button type="button" class="btn btn-light" th:onclick="|location.href='@{/boardList}'|">목록</button>
+		<button type="button" class="btn btn-danger">삭제</button>
+	</div>
+</body>
+</html>

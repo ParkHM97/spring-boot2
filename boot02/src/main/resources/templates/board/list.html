@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ 	  layout:decorate="~{common/layouts/main_layout}"
+ 	  layout:fragment="content">
+<!--/* 각 기능별 페이지에 layout 적용, layout decorate : 자신이 적용할 레이아웃 파일을 찾을 때 사용, 
+	파일 전체를 사용하기 때문에 fragment 이름은X
+	layout:fragment : 적용 위치 */-->
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<!--/* boards */-->
+	<div class="container text-center">
+		<h3>게시판 목록</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th><!-- yyyy년 MM월 dd일 -->
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="post : ${boards}">
+					<tr th:id="${post.bno}" 
+					    th:onclick="|location.href='@{/boardInfo(bno=${post.bno})}'|">
+						<td>[[ ${post.bno} ]]</td>
+						<td th:text="${post.title}"></td>
+						<td th:text="${post.writer}"></td>
+						<td th:text="${#dates.format(post.regdate, 'yyyy년 MM월 dd일')}"></td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
